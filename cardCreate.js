@@ -4,7 +4,6 @@ var inquirer = require("inquirer");
 var fs = require('file-system');
 
 var count = 0;
-var flashCardArray = [];
 
 inquirer.prompt([
 	{
@@ -38,6 +37,7 @@ function cardCreation() {
 	    	message: "How many cards would you like to make?",
 	    }
 	]).then(function(cardStyle) {
+	    
 	    gameType = cardStyle.flashCardType;
 	    var cardCount = cardStyle.numberOfCards;
 	    cardCreator();
@@ -65,7 +65,11 @@ function cardCreation() {
 			        	answers.completeText,
 			        	answers.hiddenText);
 
-			        flashCardArray.push(newCard);
+    				fs.appendFile("log.txt", "\n" + JSON.stringify(newCard) + ",", function(err) {
+			    		if (err) {
+			    			return console.log("Error; " + err);
+			    		}
+			    	})
 
 			        count++
 
@@ -93,7 +97,11 @@ function cardCreation() {
 			    		answers.front,
 			    		answers.back);
 
-			    	flashCardArray.push(newCard);
+			    	fs.appendFile("log.txt", "\n" + JSON.stringify(newCard) + ",", function(err) {
+			    		if (err) {
+			    			return console.log("Error; " + err);
+			    		}
+			    	})
 
 			    	count++
 
@@ -108,6 +116,6 @@ function cardCreation() {
 };
 
 function reviewCards() {
-	console.log(flashCardArray);
+
 };
 

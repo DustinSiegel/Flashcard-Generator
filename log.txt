@@ -1,0 +1,6 @@
+
+{"front":"Who is my Fiance?","back":"Kelly Whyman"},
+{"front":"What is my name?","back":"Dustin Siegel"},
+{"front":"Why am I doing this?","back":"So that I can."},
+{"completeText":"My name is Dustin Siegel.","hiddenText":"Dustin Siegel"},
+{"completeText":"I live in Denver.","hiddenText":"Denver"},
