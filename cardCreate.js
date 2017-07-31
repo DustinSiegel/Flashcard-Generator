@@ -28,8 +28,13 @@ function cardCreation() {
 	    {
 	     	type: "list",
 	     	name: "flashCardType",
-	     	message: "Select a style of Flash Card to build.",
+	     	message: "Select a style of flash card deck to build.",
 	     	choices: ["Basic Card", "Cloze Card"]
+	    },
+	    {
+	    	type: "input",
+	    	name: "deckName",
+	    	message: "What is this deck's name?"
 	    },
 	    {
 	    	type: "input",
@@ -38,8 +43,10 @@ function cardCreation() {
 	    }
 	]).then(function(cardStyle) {
 	    
-	    gameType = cardStyle.flashCardType;
+	    var gameType = cardStyle.flashCardType;
 	    var cardCount = cardStyle.numberOfCards;
+	    var deckName = cardStyle.deckName;
+	    
 	    cardCreator();
 
 	    function cardCreator() {
@@ -62,6 +69,7 @@ function cardCreation() {
 			    }]).then(function(answers) {
 
 			        var newCard = new clozeData.ClozeCard(
+			        	cardStyle.deckName,
 			        	answers.completeText,
 			        	answers.hiddenText);
 
@@ -94,6 +102,7 @@ function cardCreation() {
 			    }]).then(function(answers) {
 
 			    	var newCard = new basicData.BasicCard(
+			    		cardStyle.deckName,
 			    		answers.front,
 			    		answers.back);
 

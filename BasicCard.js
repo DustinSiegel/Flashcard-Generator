@@ -1,5 +1,6 @@
-exports.BasicCard = function (front, back) {
+exports.BasicCard = function (name, front, back) {
 	
+	this.deckName = name;
 	this.front = front;
 	this.back = back;
 };
