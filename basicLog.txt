@@ -1,3 +1,5 @@
 {"front":"How old am I?","back":"38"},
 {"front":"Who is my favorite person?","back":"Kelly"},
 {"front":"How old is Kelly?","back":"38"},
+{"front":"What is my favorite website?","back":"YouTube"},
+{"front":"What is my favorite sport?","back":"Rock Climbing"},

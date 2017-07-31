@@ -3,3 +3,5 @@
 {"completeText":"The sun is millions of degrees F.","hiddenText":"millions","partial":"The sun is ... of degrees F."},
 {"completeText":"I am 38 years old.","hiddenText":"38","partial":"I am ... years old."},
 {"completeText":"Kelly is 36 years old.","hiddenText":"36","partial":"Kelly is ... years old."},
+{"completeText":"My favorite sport is rock climbing.","hiddenText":"rock climbing","partial":"My favorite sport is ...."},
+{"completeText":"My favorite website is YouTube.","hiddenText":"YouTube","partial":"My favorite website is ...."},

@@ -120,32 +120,85 @@ function cardCreation() {
 
 function reviewCards() {
 
-	fs.readFile("basiclog.txt", function(err, data) {
-
-		var logArray = data.toString().split(",");
-		var deckQuestionArray = [];
-		var deckAnswerArray = [];
-
-		for (var i = 0; i <logArray.length; i+=2) {
-			deckQuestionArray.push(logArray[i].replace("}", ""));
-		};
-
-		for (var i = 1; i <logArray.length; i+=2) {
-			deckAnswerArray.push(logArray[i].replace("}", ""));
-		};
-
 	inquirer.prompt([
-  		{
-  			name: "userDisplay",
-  			message: deckQuestionArray[reviewCount],
-  		}]).then(function(userResponse){
-          	if ('"back"'+":"+'"'+userResponse.userDisplay+'"' == deckAnswerArray[reviewCount]){
-            	console.log("YUP!");
-         	 } else {
-            	console.log("NOPE! " + deckAnswerArray[reviewCount].replace("back:", ""));
-         	 }
-          reviewCount++;
-          reviewCards();
-		});
+		{
+			type: "list",
+			name: "reviewType",
+			message: "Which set of flash cards would you like to review?",
+			choices: ["Basic Cards", "Cloze Cards"]
+		},
+	]).then(function(reviewType) {
+
+		reviewDeck();
+
+		function reviewDeck() {
+
+			if (reviewType.reviewType === "Basic Cards") {
+
+				fs.readFile("basiclog.txt", function(err, data) {
+
+					var logArray = data.toString().split(",");
+					var deckQuestionArray = [];
+					var deckAnswerArray = [];
+
+					for (var i = 0; i <logArray.length; i+=2) {
+						deckQuestionArray.push(logArray[i].replace("}", ""));
+					};
+
+					for (var i = 1; i <logArray.length; i+=2) {
+						deckAnswerArray.push(logArray[i].replace("}", ""));
+					};
+
+				inquirer.prompt([
+			  		{
+			  			name: "userDisplay",
+			  			message: deckQuestionArray[reviewCount],
+			  		}]).then(function(userResponse){
+			          	
+			          	if ('"back"'+":"+'"'+userResponse.userDisplay+'"' == deckAnswerArray[reviewCount]){
+			            	console.log("YUP!");
+			         	 } else {
+			            	console.log("NOPE! " + deckAnswerArray[reviewCount]);
+			         	 }
+
+			        reviewCount++;
+			        reviewDeck();
+
+					});
+				});
+			} else {
+
+				fs.readFile("clozeLog.txt", function(err, data) {
+
+					var logArray = data.toString().split(",");
+					var deckQuestionArray = [];
+					var deckAnswerArray = [];
+
+					for (var i = 2; i <logArray.length; i+=3) {
+						deckQuestionArray.push(logArray[i].replace("}", ""));
+					};
+
+					for (var i = 1; i <logArray.length; i+=3) {
+						deckAnswerArray.push(logArray[i].replace("}", ""));
+					};
+
+				inquirer.prompt([
+			  		{
+			  			name: "userDisplay",
+			  			message: deckQuestionArray[reviewCount],
+			  		}]).then(function(userResponse){
+			          	
+			          	if ('"hiddenText"' + ":" + '"' + userResponse.userDisplay + '"' == deckAnswerArray[reviewCount]){
+			            	console.log("YUP!");
+			         	 } else {
+			            	console.log("NOPE! " + deckAnswerArray[reviewCount]);
+			         	 }
+
+			          	reviewCount++;
+			          	reviewDeck();
+					});
+				});
+			};
+		};
 	});
 };
