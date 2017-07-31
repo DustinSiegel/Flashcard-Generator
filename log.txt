@@ -1,3 +1,7 @@
+{"front":"How big is the sun?","back":"Really fricken big!"},
+{"front":"How hot is the sun?","back":"Milions of degrees."},
+{"front":"How far away is the sun?","back":"Really fricken far!"},
 
-{"deckName":"Dustin attempt three","front":"Do I like youtube?","back":"yup."},
-{"deckName":"Dustin attempt three","front":"Do I like Kelly?","back":"Hell yeah!"},
+{"completeText":"The sun is a mass of incandecent gas.","hiddenText":"incandecent gas","partial":"The sun is a mass of ...."},
+{"completeText":"The sun is a gigatic nuclear furnace.","hiddenText":"nuclear furnace","partial":"The sun is a gigatic ...."},
+{"completeText":"The sun is millions of degrees F.","hiddenText":"millions","partial":"The sun is ... of degrees F."},

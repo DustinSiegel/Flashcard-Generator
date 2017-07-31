@@ -1,7 +1,7 @@
-exports.ClozeCard = function(name, text, cloze) {
+exports.ClozeCard = function(text, cloze) {
   	
-  	this.deckName = name;
   	this.completeText = text;
   	this.hiddenText = cloze;
-  	this.completeText.replace(this.hiddenText, "...");
+  	this.partial = text.replace(cloze, "...");
 };
+

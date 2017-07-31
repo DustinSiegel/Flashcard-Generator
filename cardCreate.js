@@ -4,6 +4,7 @@ var inquirer = require("inquirer");
 var fs = require('file-system');
 
 var count = 0;
+var reviewCount = 0;
 
 inquirer.prompt([
 	{
@@ -33,11 +34,6 @@ function cardCreation() {
 	    },
 	    {
 	    	type: "input",
-	    	name: "deckName",
-	    	message: "What is this deck's name?"
-	    },
-	    {
-	    	type: "input",
 	    	name: "numberOfCards",
 	    	message: "How many cards would you like to make?",
 	    }
@@ -45,7 +41,6 @@ function cardCreation() {
 	    
 	    var gameType = cardStyle.flashCardType;
 	    var cardCount = cardStyle.numberOfCards;
-	    var deckName = cardStyle.deckName;
 	    
 	    cardCreator();
 
@@ -69,11 +64,11 @@ function cardCreation() {
 			    }]).then(function(answers) {
 
 			        var newCard = new clozeData.ClozeCard(
-			        	cardStyle.deckName,
 			        	answers.completeText,
-			        	answers.hiddenText);
+			        	answers.hiddenText,
+			        	answers.partial);
 
-    				fs.appendFile("log.txt", "\n" + JSON.stringify(newCard) + ",", function(err) {
+    				fs.appendFile("clozeLog.txt", "\n" + JSON.stringify(newCard) + ",", function(err) {
 			    		if (err) {
 			    			return console.log("Error; " + err);
 			    		}
@@ -102,11 +97,10 @@ function cardCreation() {
 			    }]).then(function(answers) {
 
 			    	var newCard = new basicData.BasicCard(
-			    		cardStyle.deckName,
 			    		answers.front,
 			    		answers.back);
 
-			    	fs.appendFile("log.txt", "\n" + JSON.stringify(newCard) + ",", function(err) {
+			    	fs.appendFile("basicLog.txt", "" + JSON.stringify(newCard) + "," + "\n", function(err) {
 			    		if (err) {
 			    			return console.log("Error; " + err);
 			    		}
@@ -126,5 +120,32 @@ function cardCreation() {
 
 function reviewCards() {
 
-};
+	fs.readFile("basiclog.txt", function(err, data) {
 
+		var logArray = data.toString().split(",");
+		var deckQuestionArray = [];
+		var deckAnswerArray = [];
+
+		for (var i = 0; i <logArray.length; i+=2) {
+			deckQuestionArray.push(logArray[i].replace("}", ""));
+		};
+
+		for (var i = 1; i <logArray.length; i+=2) {
+			deckAnswerArray.push(logArray[i].replace("}", ""));
+		};
+
+	inquirer.prompt([
+  		{
+  			name: "userDisplay",
+  			message: deckQuestionArray[reviewCount],
+  		}]).then(function(userResponse){
+          	if ('"back"'+":"+'"'+userResponse.userDisplay+'"' == deckAnswerArray[reviewCount]){
+            	console.log("YUP!");
+         	 } else {
+            	console.log("NOPE! " + deckAnswerArray[reviewCount].replace("back:", ""));
+         	 }
+          reviewCount++;
+          reviewCards();
+		});
+	});
+};

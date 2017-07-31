@@ -1,0 +1,5 @@
+{"completeText":"The sun is a mass of incandecent gas.","hiddenText":"incandecent gas","partial":"The sun is a mass of ...."},
+{"completeText":"The sun is a gigatic nuclear furnace.","hiddenText":"nuclear furnace","partial":"The sun is a gigatic ...."},
+{"completeText":"The sun is millions of degrees F.","hiddenText":"millions","partial":"The sun is ... of degrees F."},
+{"completeText":"I am 38 years old.","hiddenText":"38","partial":"I am ... years old."},
+{"completeText":"Kelly is 36 years old.","hiddenText":"36","partial":"Kelly is ... years old."},
