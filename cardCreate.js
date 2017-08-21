@@ -196,6 +196,7 @@ function reviewCards() {
 
 			          	reviewCount++;
 			          	reviewDeck();
+			          	}
 					});
 				});
 			};
